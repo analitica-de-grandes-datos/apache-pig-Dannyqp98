@@ -20,7 +20,7 @@ data = LOAD 'data.tsv' USING PigStorage('\t') AS (col1: chararray, col2: chararr
 split_data = FOREACH data GENERATE FLATTEN(col3) AS key;
 
 --llaves
-keys_vals= FOREACH split_data GENERATE $0
+keys_vals= FOREACH split_data GENERATE $0;
 
 -- Generar grupos por clave y contar los registros en cada grupo
 grouped_data = GROUP keys_vals BY key;

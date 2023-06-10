@@ -44,4 +44,4 @@ out = FOREACH data GENERATE lastName, UPPER(lastName), LOWER(lastName);
 sortedOutput = ORDER out BY lastName;
 
 -- Guardar el resultado en la carpeta output
-STORE sortedOutput INTO 'output' USING PigStorage();
+STORE sortedOutput INTO 'output' USING PigStorage(',');

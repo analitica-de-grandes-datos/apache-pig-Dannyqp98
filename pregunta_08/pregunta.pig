@@ -22,7 +22,7 @@ data = LOAD 'data.tsv' AS (col1:chararray, col2:bag{}, col3:map[]);
 
 -- Generar una tabla con la letra de la columna 2 y la clave de la columna 3
 table = FOREACH data GENERATE FLATTEN(col2) AS letter, FLATTEN(TOBAG(TOTUPLE(col3))) AS key;
-table_keys = FOREACH table GENERATE letter, FLATTEN(keys);
+table_keys = FOREACH table GENERATE letter, FLATTEN(key);
 
 --Seleccionar columnas
 letter_keys= FOREACH table_keys GENERATE $0 AS letters, $1 AS keys;

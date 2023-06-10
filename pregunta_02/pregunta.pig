@@ -20,7 +20,7 @@ data = LOAD 'data.tsv' AS (letter:chararray, date:chararray, value:int);
 sorted_data = ORDER data BY letter, value;
 
 -- Genera el resultado separado por comas
-result = FOREACH sorted_data GENERATE CONCAT(letter, ',', (chararray)value) AS output;
+result = FOREACH sorted_data GENERATE letter, date,(chararray)value AS numero;
 
 -- Escribe el resultado en la carpeta output
 STORE result INTO 'output' USING PigStorage(',');
