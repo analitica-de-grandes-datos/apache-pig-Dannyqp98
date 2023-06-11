@@ -34,3 +34,9 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+data = LOAD 'data.csv' USING PigStorage(',') AS (id: int, firstname: chararray, lastname: chararray, birthday: chararray, color: chararray, quantity: int);
+
+formatted_result = FOREACH data GENERATE birthday, ToDate(birthday, 'yyyy-MM-dd') AS date;
+result = FOREACH formatted_result GENERATE ToString(date, 'yyyy-MM-dd') AS formatted_date, ToString(date, 'dd') AS day, ToString(date, 'd') AS day_number, ToString(date, 'EEE') AS weekday_short, ToString(date, 'EEEE') AS weekday_full;
+
+STORE result INTO 'output' USING PigStorage(',');

@@ -23,7 +23,7 @@ $ pig -x local -f pregunta.pig
 data = LOAD 'data.csv' USING PigStorage(',') AS (id:int, firstname:chararray, lastname:chararray, birthday:chararray, color:chararray, quantity:int);
 
 -- Extrae el segundo grupo capturado por la expresión regular
-extractedData = = FOREACH data GENERATE REGEX_EXTRACT(birthday, '(....)-(..)-(..)', 2) AS extracted_birthday;
+extractedData =  FOREACH data GENERATE REGEX_EXTRACT(birthday, '(....)-(..)-(..)', 2) AS extracted_birthday;
 
 -- Guarda el resultado en la carpeta 'output'
 STORE extractedData INTO 'output' USING PigStorage(',');

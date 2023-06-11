@@ -36,4 +36,4 @@ sortedData = ORDER lastNameWithLength BY length DESC, lastName;
 out = LIMIT sortedData 5;
 
 -- Guardar el resultado en la carpeta output
-STORE out INTO 'output' USING PigStorage(,);
+STORE out INTO 'output' USING PigStorage(',');
