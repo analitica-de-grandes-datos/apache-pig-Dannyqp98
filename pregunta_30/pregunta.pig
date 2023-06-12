@@ -38,5 +38,19 @@ data = LOAD 'data.csv' USING PigStorage(',') AS (id: int, firstname: chararray, 
 
 formatted_result = FOREACH data GENERATE birthday, ToDate(birthday, 'yyyy-MM-dd') AS date;
 result = FOREACH formatted_result GENERATE ToString(date, 'yyyy-MM-dd') AS formatted_date, ToString(date, 'dd') AS day, ToString(date, 'd') AS day_number, ToString(date, 'EEE') AS weekday_short, ToString(date, 'EEEE') AS weekday_full;
+rep_result = FOREACH result GENERATE formatted_date, day, day_number, REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(weekday_short,'Mon','lun')
+,'Tues','mar')
+,'Wed','mie')
+,'Thu','jue')
+,'Fri','vie')
+,'Sat','Sab')
+,'Sun','dom'),
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(weekday_full,'Monday','lunes')
+,'Tuesday','martes')
+,'Wednesday','miercoles')
+,'Thursday','jueves')
+,'Friday','viernes')
+,'Saturday','Sabado')
+,'Sunday','domingo') AS Full_name_day;
 
-STORE result INTO 'output' USING PigStorage(',');
+STORE rep_result INTO 'output' USING PigStorage(',');
